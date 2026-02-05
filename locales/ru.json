@@ -17,6 +17,7 @@
   "menu_server_status_button": "📊 Статус",
   "menu_support_button": "💬 Поддержка",
   "menu_terms_button": "📄 Условия сервиса",
+  "terms_info_message": "🔒 Политика конфиденциальности: <a href=\"https://telegra.ph/Politika-konfidencialnosti-Virtez-VPN-02-05\">читать</a>\n📜 Пользовательское соглашение: <a href=\"https://telegra.ph/Polzovatelskoe-soglashenie-Virtez-VPN-02-05\">читать</a>",
   "back_to_main_menu_button": "⬅️ Назад",
   "choose_language": "Выберите язык / Select language:",
   "language_set_alert": "Язык изменен!",

@@ -50,10 +50,9 @@ def get_main_menu_inline_keyboard(
             InlineKeyboardButton(text=_(key="menu_support_button"),
                                  url=settings.SUPPORT_LINK))
 
-    if settings.TERMS_OF_SERVICE_URL:
-        builder.row(
-            InlineKeyboardButton(text=_(key="menu_terms_button"),
-                                 url=settings.TERMS_OF_SERVICE_URL))
+    builder.row(
+        InlineKeyboardButton(text=_(key="menu_terms_button"),
+                             callback_data="main_action:terms"))
 
     return builder.as_markup()
 

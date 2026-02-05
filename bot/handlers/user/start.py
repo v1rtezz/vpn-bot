@@ -16,6 +16,7 @@ from bot.keyboards.inline.user_keyboards import (
     get_main_menu_inline_keyboard,
     get_language_selection_keyboard,
     get_channel_subscription_keyboard,
+    get_back_to_main_menu_markup,
 )
 from bot.services.subscription_service import SubscriptionService
 from bot.services.panel_api_service import PanelApiService
@@ -696,6 +697,37 @@ async def main_action_callback_handler(
     elif action == "language":
 
         await language_command_handler(callback, i18n_data, settings)
+    elif action == "terms":
+        i18n: Optional[JsonI18n] = i18n_data.get("i18n_instance")
+        current_lang = i18n_data.get("current_language", settings.DEFAULT_LANGUAGE)
+        _ = (lambda key, **kwargs: i18n.gettext(current_lang, key, **kwargs) if i18n else key)
+
+        text_to_send = _("terms_info_message")
+        reply_markup = get_back_to_main_menu_markup(current_lang, i18n)
+
+        try:
+            if callback.message:
+                await callback.message.edit_text(
+                    text_to_send,
+                    reply_markup=reply_markup,
+                    parse_mode="HTML",
+                    disable_web_page_preview=True,
+                )
+            else:
+                await callback.answer(text_to_send, show_alert=True)
+        except Exception:
+            target_message_obj = callback.message
+            if target_message_obj:
+                await target_message_obj.answer(
+                    text_to_send,
+                    reply_markup=reply_markup,
+                    parse_mode="HTML",
+                    disable_web_page_preview=True,
+                )
+        try:
+            await callback.answer()
+        except Exception:
+            pass
     elif action == "back_to_main":
         await send_main_menu(callback,
                              settings,
