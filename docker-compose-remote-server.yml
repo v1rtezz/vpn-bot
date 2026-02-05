@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     ports:
-      - "127.0.0.1:8080:8080"
+      - "8080:8080"
     networks:
       - remnawave-network
     environment:
@@ -36,7 +36,8 @@ services:
       timeout: 5s
       retries: 20
 networks:
-  remnawave-network: null
+  remnawave-network:
+    external: true
 volumes:
   remnawave-tg-shop-db-data:
     name: remnawave-tg-shop-db-data
